@@ -4,11 +4,11 @@ DataTable module using react and react-bootstrap
 
 ## Installation
 
-  npm install scapegoat --save
+  npm i --save react-bootstrap-datatable
 
 ## Usage
 
-      import {DataTable, DataColumn} from 'react-bootstrap-datatable'
+      import {DataTable, DataColumn, Pagination} from 'react-bootstrap-datatable'
 
       class Products extends React.Component{
         constructor(){
