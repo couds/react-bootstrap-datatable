@@ -62,3 +62,4 @@ DataTable module using react and react-bootstrap
 
 * 0.0.1 Initial release
 * 0.0.2 Bug Fix sorting no string columns, Bug Fix multi-column search
+* 0.0.3 move react dependency to peerDependencies to avoid problems with the react version
