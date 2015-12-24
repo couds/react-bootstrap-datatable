@@ -82,11 +82,12 @@ var DataTable = (function (_React$Component) {
           md: child.props.md,
           sortable: child.props.sortable,
           searchable: child.props.searchable,
-          currentSearch: self.state.search[self.props.field],
+          currentSearch: self.state.search[child.props.field],
           field: child.props.field,
           onSearch: _this2.search,
           isSortField: child.props.field === self.state.sort.field,
           onSort: _this2.sortBy
+
         };
 
         headers.push(_react2.default.createElement(
@@ -101,8 +102,8 @@ var DataTable = (function (_React$Component) {
           var field = keys[i];
           var value = _this2.state.search[keys[i]];
 
-          if (value) {
-            return row[field].toLowerCase().indexOf(value.toLowerCase()) !== -1;
+          if (value && row[field].toString().toLowerCase().indexOf(value.toString().toLowerCase()) === -1) {
+            return false;
           }
         }
         return true;
@@ -234,12 +235,12 @@ var _initialiseProps = function _initialiseProps() {
   this.search = function (field) {
     var self = _this3;
     return function (event) {
-      //event.target.value
       var search = _this3.state.search;
       search[field] = event.target.value;
       _this3.setState({
         search: search
       });
+
       return false;
     };
   };

@@ -57,12 +57,12 @@ class DataTable extends React.Component {
   search = (field) => {
     let self = this;
     return (event) => {
-      //event.target.value
       let search = this.state.search
       search[field] = event.target.value
       this.setState({
         search
       })
+
       return false
     }
   }
@@ -88,11 +88,12 @@ class DataTable extends React.Component {
         md: child.props.md,
         sortable: child.props.sortable,
         searchable: child.props.searchable,
-        currentSearch: self.state.search[self.props.field],
+        currentSearch: self.state.search[child.props.field],
         field: child.props.field,
         onSearch: this.search,
         isSortField: child.props.field === self.state.sort.field,
-        onSort: this.sortBy
+        onSort: this.sortBy,
+
       }
 
       headers.push(
@@ -103,12 +104,11 @@ class DataTable extends React.Component {
 
     })
 
-
     let data = this.props.data.filter((row) => {
       for (let i = 0, keys = Object.keys(this.state.search), j = keys.length; i < j; i++) {
         let [field,value] = [keys[i], this.state.search[keys[i]]]
-        if (value) {
-          return row[field].toLowerCase().indexOf(value.toLowerCase()) !== -1
+        if (value && row[field].toString().toLowerCase().indexOf(value.toString().toLowerCase()) === -1) {
+          return false
         }
       }
       return true

@@ -10,6 +10,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _reactBootstrap = require('react-bootstrap');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -23,10 +27,44 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Header = (function (_React$Component) {
   _inherits(Header, _React$Component);
 
-  function Header() {
+  function Header(props) {
     _classCallCheck(this, Header);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Header).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Header).call(this, props));
+
+    _this.showSearch = function (evt) {
+      _this.setState({
+        showSearch: true
+      });
+    };
+
+    _this.hideSearch = function () {
+      _this.setState({
+        showSearch: false
+      });
+    };
+
+    _this.onSearchShowed = function () {
+      if (!ReactDOM) {
+        var ReactDOM = require('react-dom');
+      }
+      ReactDOM.findDOMNode(_this.refs.searchInput).focus();
+    };
+
+    _this.handleInput = function (evt) {
+      if (evt.keyCode == 13) {
+        _this.hideSearch();
+      }
+    };
+
+    _this.getSearchOverlay = function () {
+      return _reactDom2.default.findDOMNode(_this.refs['search-icon']);
+    };
+
+    _this.state = {
+      showSearch: false
+    };
+    return _this;
   }
 
   _createClass(Header, [{
@@ -56,16 +94,27 @@ var Header = (function (_React$Component) {
       }
 
       if (this.props.searchable) {
-        var popup = _react2.default.createElement(
-          _reactBootstrap.Popover,
-          { id: 'search_' + this.props.field, title: 'Search' },
-          _react2.default.createElement('input', { placeholder: 'Search text', onChange: this.props.onSearch(this.props.field) })
-        );
+
         searchIcon = _react2.default.createElement(
-          _reactBootstrap.OverlayTrigger,
-          { trigger: 'click', placement: 'left', rootClose: true,
-            overlay: popup },
-          _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'search' })
+          'span',
+          null,
+          _react2.default.createElement(_reactBootstrap.Glyphicon, { ref: 'search-icon', glyph: 'search',
+            onClick: this.showSearch
+          }),
+          _react2.default.createElement(
+            _reactBootstrap.Overlay,
+            { placement: 'left', rootClose: true, target: this.getSearchOverlay,
+              show: this.state.showSearch, onHide: this.hideSearch, onEnter: this.onSearchShowed
+            },
+            _react2.default.createElement(
+              _reactBootstrap.Popover,
+              { id: 'search_' + this.props.field, title: 'Search' },
+              _react2.default.createElement('input', { ref: 'searchInput', placeholder: 'Search text', value: this.props.currentSearch,
+                onChange: this.props.onSearch(this.props.field),
+                onKeyDown: this.handleInput
+              })
+            )
+          )
         );
       }
 
@@ -78,7 +127,8 @@ var Header = (function (_React$Component) {
           { style: { position: 'relative' } },
           _react2.default.createElement(
             'div',
-            { style: { marginRight: this.props.searchable ? '25px' : 0 }, onClick: this.props.onSort(this.props.field, this.props.sortable) },
+            { style: { marginRight: this.props.searchable ? '25px' : 0 },
+              onClick: this.props.onSort(this.props.field, this.props.sortable) },
             this.props.children,
             _react2.default.createElement(
               'span',

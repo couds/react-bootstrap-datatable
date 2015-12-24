@@ -33,6 +33,8 @@ var Pagination = (function (_React$Component) {
 
   _createClass(Pagination, [{
     key: 'render',
+
+    //selectedEvent.eventKey
     value: function render() {
       return _react2.default.createElement(_reactBootstrap.Pagination, _extends({}, this.props, {
         onSelect: this.props.handleSelect }));
@@ -49,8 +51,6 @@ Pagination.defaultProps = {
   activePage: 1,
   next: true,
   prev: true,
-  handleSelect: function handleSelect(event, selectedEvent) {
-    console.log(selectedEvent.eventKey);
-  }
+  handleSelect: function handleSelect(event, selectedEvent) {}
 };
 exports.default = Pagination;

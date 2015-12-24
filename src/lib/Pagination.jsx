@@ -10,7 +10,7 @@ class Pagination extends React.Component {
     next: true,
     prev: true,
     handleSelect: (event, selectedEvent)=>{
-      console.log(selectedEvent.eventKey)
+      //selectedEvent.eventKey
     }
   }
   
