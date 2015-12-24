@@ -93,7 +93,7 @@ class DataTable extends React.Component {
         onSearch: this.search,
         isSortField: child.props.field === self.state.sort.field,
         onSort: this.sortBy,
-
+        searchOptions : child.props.searchOptions
       }
 
       headers.push(

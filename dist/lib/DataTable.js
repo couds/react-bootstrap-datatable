@@ -86,8 +86,8 @@ var DataTable = (function (_React$Component) {
           field: child.props.field,
           onSearch: _this2.search,
           isSortField: child.props.field === self.state.sort.field,
-          onSort: _this2.sortBy
-
+          onSort: _this2.sortBy,
+          searchOptions: child.props.searchOptions
         };
 
         headers.push(_react2.default.createElement(

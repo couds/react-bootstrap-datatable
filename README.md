@@ -31,6 +31,25 @@ DataTable module using react and react-bootstrap
         }
       
         render(){
+        
+          let typesOptions = {
+            caseSensitive : false,//False by default
+            options : [
+              {
+                value : 'android',
+                title: 'Android'
+              },
+              {
+                value : 'ios',
+                title: 'Apple'
+              },
+              {
+                value : 'windows',
+                title: 'Windows Phone'
+              }
+            ]
+          }
+          
           return(
             <DataTable data={this.dataObject}>
               <DataColumn title="ID" key="id" sortable={true} searchable={false} md={2} />
@@ -38,6 +57,7 @@ DataTable module using react and react-bootstrap
                 Title as Children too
               </DataColumn>
               <DataColumn title="Price" key="price" transform={this.transform} sortable={true} md={2} searchable={false}  />
+              <DataColumn title="Type" key="type" md={2} searchable={false}  searchOptions={typesOptions} />
               <Pagination maxButtons={3} itemPerPage={10} />
             </DataTable>  
           )
@@ -62,4 +82,5 @@ DataTable module using react and react-bootstrap
 
 * 0.0.1 Initial release
 * 0.0.2 Bug Fix sorting no string columns, Bug Fix multi-column search
-* 0.0.3 move react dependency to peerDependencies to avoid problems with the react version
+* 0.0.3 Move react dependency to peerDependencies to avoid problems with the react version
+* 0.0.4 Allow combobox in column search

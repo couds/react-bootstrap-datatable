@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import { Row,Col, Glyphicon, Overlay ,Popover} from 'react-bootstrap'
+import { Row,Col, Glyphicon, Overlay ,Popover, Input as Search} from 'react-bootstrap'
 
 class Header extends React.Component {
 
@@ -40,6 +40,8 @@ class Header extends React.Component {
   getSearchOverlay = () => {
     return ReactDom.findDOMNode(this.refs['search-icon'])
   }
+
+
   
   render() {
     let self = this
@@ -64,6 +66,17 @@ class Header extends React.Component {
 
     if (this.props.searchable) {
 
+      let options = null
+      if(this.props.searchOptions && this.props.searchOptions.options){
+
+        options = this.props.searchOptions.options.map(select => {
+          return <option key={select.value} value={select.value}>{select.title}</option>
+        })
+
+        options.unshift(<option key="SELECT..." value="">Select...</option>)
+      }
+
+
       searchIcon = (
         <span>
           <Glyphicon ref="search-icon" glyph='search'
@@ -73,10 +86,12 @@ class Header extends React.Component {
                    show={this.state.showSearch}  onHide={this.hideSearch} onEnter={this.onSearchShowed}
             >
             <Popover id={'search_'+this.props.field} title="Search">
-              <input ref="searchInput" placeholder="Search text" value={this.props.currentSearch}
+              <Search type={options?"select":"text"} ref="searchInput" placeholder="Search text" value={this.props.currentSearch}
                      onChange={this.props.onSearch(this.props.field)}
                      onKeyDown={this.handleInput}
-                />
+                >
+                {options}
+              </Search>
             </Popover>
           </Overlay>
         </span>

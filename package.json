@@ -1,6 +1,6 @@
 {
   "name": "react-datatable-bootstrap",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "DataTable module using react and react-bootstrap",
   "main": "dist/index.js",
   "dependencies": {

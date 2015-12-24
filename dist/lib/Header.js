@@ -95,6 +95,24 @@ var Header = (function (_React$Component) {
 
       if (this.props.searchable) {
 
+        var options = null;
+        if (this.props.searchOptions && this.props.searchOptions.options) {
+
+          options = this.props.searchOptions.options.map(function (select) {
+            return _react2.default.createElement(
+              'option',
+              { key: select.value, value: select.value },
+              select.title
+            );
+          });
+
+          options.unshift(_react2.default.createElement(
+            'option',
+            { key: 'SELECT...', value: '' },
+            'Select...'
+          ));
+        }
+
         searchIcon = _react2.default.createElement(
           'span',
           null,
@@ -109,10 +127,14 @@ var Header = (function (_React$Component) {
             _react2.default.createElement(
               _reactBootstrap.Popover,
               { id: 'search_' + this.props.field, title: 'Search' },
-              _react2.default.createElement('input', { ref: 'searchInput', placeholder: 'Search text', value: this.props.currentSearch,
-                onChange: this.props.onSearch(this.props.field),
-                onKeyDown: this.handleInput
-              })
+              _react2.default.createElement(
+                _reactBootstrap.Input,
+                { type: options ? "select" : "text", ref: 'searchInput', placeholder: 'Search text', value: this.props.currentSearch,
+                  onChange: this.props.onSearch(this.props.field),
+                  onKeyDown: this.handleInput
+                },
+                options
+              )
             )
           )
         );
