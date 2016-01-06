@@ -3,7 +3,7 @@ import {Pagination as PaginationBS} from 'react-bootstrap'
 class Pagination extends React.Component {
 
   static defaultProps  = {
-    items: 5,
+    items: 1,
     maxButtons : 3,
     bsSize: 'small',
     activePage : 1,

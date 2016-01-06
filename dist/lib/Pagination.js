@@ -45,7 +45,7 @@ var Pagination = (function (_React$Component) {
 })(_react2.default.Component);
 
 Pagination.defaultProps = {
-  items: 5,
+  items: 1,
   maxButtons: 3,
   bsSize: 'small',
   activePage: 1,

@@ -84,3 +84,4 @@ DataTable module using react and react-bootstrap
 * 0.0.2 Bug Fix sorting no string columns, Bug Fix multi-column search
 * 0.0.3 Move react dependency to peerDependencies to avoid problems with the react version
 * 0.0.4 Allow combobox in column search
+* 0.0.5 add Styles to datatable dtStyle=[default, dark]

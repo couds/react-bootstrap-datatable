@@ -92,8 +92,10 @@ class DataTable extends React.Component {
         field: child.props.field,
         onSearch: this.search,
         isSortField: child.props.field === self.state.sort.field,
+        asc : self.state.sort.asc,
         onSort: this.sortBy,
-        searchOptions : child.props.searchOptions
+        searchOptions: child.props.searchOptions,
+        dtStyle: this.props.dtStyle
       }
 
       headers.push(
@@ -160,7 +162,7 @@ class DataTable extends React.Component {
             text = child.props.transform(text, row, i)
           }
           return (
-            <td key={i}>{text}</td>
+            <td key={i}  style={{verticalAlign: 'middle'}} >{text}</td>
           )
         })}
       </tr>)
@@ -168,11 +170,20 @@ class DataTable extends React.Component {
 
     }
 
+    let headerStyle = {}
+    switch (this.props.dtStyle) {
+      case 'dark':
+        headerStyle = {
+          backgroundColor: '#6c828b',
+          color: '#FFF'
+        }
+        break;
 
+    }
     return (
       <Row>
         <Table striped bordered condensed hover>
-          <thead>
+          <thead style={headerStyle}>
           <tr>
             {headers}
           </tr>

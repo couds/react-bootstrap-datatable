@@ -86,8 +86,10 @@ var DataTable = (function (_React$Component) {
           field: child.props.field,
           onSearch: _this2.search,
           isSortField: child.props.field === self.state.sort.field,
+          asc: self.state.sort.asc,
           onSort: _this2.sortBy,
-          searchOptions: child.props.searchOptions
+          searchOptions: child.props.searchOptions,
+          dtStyle: _this2.props.dtStyle
         };
 
         headers.push(_react2.default.createElement(
@@ -163,7 +165,7 @@ var DataTable = (function (_React$Component) {
             }
             return _react2.default.createElement(
               'td',
-              { key: i },
+              { key: i, style: { verticalAlign: 'middle' } },
               text
             );
           })
@@ -174,6 +176,16 @@ var DataTable = (function (_React$Component) {
         _loop(i, j);
       }
 
+      var headerStyle = {};
+      switch (this.props.dtStyle) {
+        case 'dark':
+          headerStyle = {
+            backgroundColor: '#6c828b',
+            color: '#FFF'
+          };
+          break;
+
+      }
       return _react2.default.createElement(
         _reactBootstrap.Row,
         null,
@@ -182,7 +194,7 @@ var DataTable = (function (_React$Component) {
           { striped: true, bordered: true, condensed: true, hover: true },
           _react2.default.createElement(
             'thead',
-            null,
+            { style: headerStyle },
             _react2.default.createElement(
               'tr',
               null,
