@@ -86,3 +86,5 @@ DataTable module using react and react-bootstrap
 * 0.0.4 Allow combobox in column search
 * 0.0.5 add Styles to datatable dtStyle=[default, dark]
 * 0.0.6 bug fix: set current page to 1 when starting a search
+* 0.0.7 bug fix: configuration problem
+
