@@ -60,7 +60,11 @@ class DataTable extends React.Component {
       let search = this.state.search
       search[field] = event.target.value
       this.setState({
-        search
+        search,
+        pagination: {
+          activePage: 1,
+          itemPerPage: this.state.pagination.itemPerPage
+        }
       })
 
       return false

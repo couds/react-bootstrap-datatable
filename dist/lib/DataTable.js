@@ -250,7 +250,11 @@ var _initialiseProps = function _initialiseProps() {
       var search = _this3.state.search;
       search[field] = event.target.value;
       _this3.setState({
-        search: search
+        search: search,
+        pagination: {
+          activePage: 1,
+          itemPerPage: _this3.state.pagination.itemPerPage
+        }
       });
 
       return false;
