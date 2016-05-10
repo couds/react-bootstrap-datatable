@@ -71,6 +71,20 @@ var Header = (function (_React$Component) {
     key: 'render',
     value: function render() {
       var self = this;
+      var iconsStyles = {
+        sort: '#000',
+        search: '#000'
+      };
+      switch (this.props.dtStyle) {
+        case 'dark':
+          iconsStyles = {
+            sort: '#FFF',
+            search: '#FFF'
+          };
+          break;
+
+      }
+
       var sortIcons = _react2.default.createElement('div', { style: { width: '1px', height: '23px', float: 'right', marginRight: '2px' } }),
           searchIcon = '';
       if (this.props.sortable) {
@@ -81,13 +95,13 @@ var Header = (function (_React$Component) {
           _react2.default.createElement(
             'span',
             {
-              style: { fontSize: '10px', display: 'block', color: isSortField && this.props.asc ? 'black' : 'grey', marginBottom: '-5px' } },
+              style: { fontSize: '10px', display: 'block', opacity: isSortField && this.props.asc ? '1' : '0.3', color: iconsStyles.sort, marginBottom: '-5px' } },
             _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'triangle-top' })
           ),
           _react2.default.createElement(
             'span',
             {
-              style: { fontSize: '10px', display: 'block', color: isSortField && !this.props.asc ? 'black' : 'grey', marginTop: '-5px' } },
+              style: { fontSize: '10px', display: 'block', opacity: isSortField && !this.props.asc ? '1' : '0.3', color: iconsStyles.sort, marginTop: '-5px' } },
             _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'triangle-bottom' })
           )
         );
@@ -116,7 +130,7 @@ var Header = (function (_React$Component) {
         searchIcon = _react2.default.createElement(
           'span',
           null,
-          _react2.default.createElement(_reactBootstrap.Glyphicon, { ref: 'search-icon', glyph: 'search',
+          _react2.default.createElement(_reactBootstrap.Glyphicon, { ref: 'search-icon', glyph: 'filter',
             onClick: this.showSearch
           }),
           _react2.default.createElement(
@@ -129,7 +143,8 @@ var Header = (function (_React$Component) {
               { id: 'search_' + this.props.field, title: 'Search' },
               _react2.default.createElement(
                 _reactBootstrap.Input,
-                { type: options ? "select" : "text", ref: 'searchInput', placeholder: 'Search text', value: this.props.currentSearch,
+                { type: options ? "select" : "text", ref: 'searchInput', placeholder: 'Search text',
+                  value: this.props.currentSearch,
                   onChange: this.props.onSearch(this.props.field),
                   onKeyDown: this.handleInput
                 },
@@ -163,7 +178,8 @@ var Header = (function (_React$Component) {
             { style: { position: 'absolute', right: 0, top: 0 } },
             _react2.default.createElement(
               'span',
-              { style: { fontSize: '17px', marginTop: '3px', color: this.props.currentSearch ? 'red' : 'black' } },
+              {
+                style: { fontSize: '17px', marginTop: '3px', color: iconsStyles.search, opacity: this.props.currentSearch ? 1 : 0.3 } },
               searchIcon
             )
           )

@@ -25,7 +25,7 @@ class Header extends React.Component {
   }
 
   onSearchShowed = () => {
-    if(!ReactDOM){
+    if (!ReactDOM) {
       var ReactDOM = require('react-dom')
     }
     ReactDOM.findDOMNode(this.refs.searchInput).focus()
@@ -41,10 +41,24 @@ class Header extends React.Component {
     return ReactDom.findDOMNode(this.refs['search-icon'])
   }
 
-
   
   render() {
     let self = this
+    let iconsStyles = {
+      sort: '#000',
+      search: '#000'
+    }
+    switch (this.props.dtStyle) {
+      case 'dark':
+        iconsStyles = {
+          sort: '#FFF',
+          search: '#FFF'
+        }
+        break;
+
+    }
+
+
     let sortIcons = (
       <div style={{width: '1px', height: '23px',float: 'right', marginRight: '2px'}}></div>
     ), searchIcon = '';
@@ -53,11 +67,11 @@ class Header extends React.Component {
       sortIcons = (
         <span style={{display:'inline-block'}}>
           <span
-            style={{fontSize: '10px', display: 'block',color: (isSortField && this.props.asc)?'black':'grey', marginBottom: '-5px' }}>
+            style={{fontSize: '10px', display: 'block',opacity: (isSortField && this.props.asc)?'1':'0.3',color: iconsStyles.sort, marginBottom: '-5px' }}>
             <Glyphicon glyph='triangle-top'/>
           </span>
           <span
-            style={{fontSize: '10px', display: 'block',color: (isSortField && !this.props.asc)?'black':'grey', marginTop: '-5px' }}>
+            style={{fontSize: '10px', display:'block',opacity: (isSortField && !this.props.asc)?'1':'0.3',color: iconsStyles.sort, marginTop: '-5px' }}>
             <Glyphicon glyph='triangle-bottom'/>
           </span>
         </span>
@@ -67,7 +81,7 @@ class Header extends React.Component {
     if (this.props.searchable) {
 
       let options = null
-      if(this.props.searchOptions && this.props.searchOptions.options){
+      if (this.props.searchOptions && this.props.searchOptions.options) {
 
         options = this.props.searchOptions.options.map(select => {
           return <option key={select.value} value={select.value}>{select.title}</option>
@@ -79,16 +93,17 @@ class Header extends React.Component {
 
       searchIcon = (
         <span>
-          <Glyphicon ref="search-icon" glyph='search'
+          <Glyphicon ref="search-icon" glyph='filter'
                      onClick={this.showSearch}
             />
           <Overlay placement="left" rootClose target={this.getSearchOverlay}
-                   show={this.state.showSearch}  onHide={this.hideSearch} onEnter={this.onSearchShowed}
+                   show={this.state.showSearch} onHide={this.hideSearch} onEnter={this.onSearchShowed}
             >
             <Popover id={'search_'+this.props.field} title="Search">
-              <Search type={options?"select":"text"} ref="searchInput" placeholder="Search text" value={this.props.currentSearch}
-                     onChange={this.props.onSearch(this.props.field)}
-                     onKeyDown={this.handleInput}
+              <Search type={options?"select":"text"} ref="searchInput" placeholder="Search text"
+                      value={this.props.currentSearch}
+                      onChange={this.props.onSearch(this.props.field)}
+                      onKeyDown={this.handleInput}
                 >
                 {options}
               </Search>
@@ -112,7 +127,8 @@ class Header extends React.Component {
              </span>
           </div>
           <div style={{position: 'absolute', right: 0, top : 0}}>
-              <span style={{fontSize: '17px',marginTop: '3px',color:this.props.currentSearch?'red':'black'}}>
+              <span
+                style={{fontSize: '17px',marginTop: '3px',color:iconsStyles.search, opacity: this.props.currentSearch?1:0.3}}>
                  {searchIcon}
                </span>
           </div>

@@ -6,7 +6,8 @@ class DataColumn extends React.Component {
     title: React.PropTypes.string,
     field: React.PropTypes.string.isRequired,
     sortable : React.PropTypes.bool,
-    md : React.PropTypes.number
+    md : React.PropTypes.number,
+    allowHtml : React.PropTypes.bool
   }
 
   static defaultProps = {
